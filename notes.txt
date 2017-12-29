@@ -1,0 +1,4 @@
+#blank.php
+Es una plantilla limpia del layout, copiar en nueva vista.
+#examples.xhtml
+Contiene los demos de los componentes del template.
