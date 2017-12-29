@@ -1,3 +1,8 @@
+<?php
+  require($_SERVER['DOCUMENT_ROOT'].'/ShopManager/controllers/route.php');
+  $route = new routes();
+  $modulo = $route->getModulo($_SERVER['REQUEST_URI']);
+?>
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="adjust-nav">
     <div class="navbar-header">
@@ -18,19 +23,16 @@
 <nav class="navbar-default navbar-side" role="navigation">
   <div class="sidebar-collapse">
     <ul class="nav" id="main-menu">
-      <li >
-          <a href="#" ><i class="fa fa-bars"></i><?php echo ""; ?></a>
-      </li>
-      <li >
+      <li <?php echo $route->isActive($modulo,'');?>>
         <a href="/ShopManager/panel/" ><i class="fa fa-home "></i>Inicio</a>
       </li>
-      <li>
+      <li <?php echo $route->isActive($modulo,'Productos');?>>
         <a href="/ShopManager/panel/productos/"><i class="fa fa-cubes "></i>Productos</a>
       </li>
-      <li>
+      <li <?php echo $route->isActive($modulo,'Examples');?>>
         <a href="/ShopManager/panel/examples.php"><i class="fa fa-table "></i>Examples</a>
       </li>
-      <li class="active-link">
+      <li <?php echo $route->isActive($modulo,'Blank');?>>
         <a href="/ShopManager/panel/blank.php"><i class="fa fa-edit "></i>Blank Page</a>
       </li>
     </ul>
