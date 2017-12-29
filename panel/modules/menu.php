@@ -24,6 +24,12 @@
       <li <?php echo $route->isActive($modulo,'Productos');?>>
         <a href="/ShopManager/panel/productos/"><i class="fa fa-cubes "></i>Productos</a>
       </li>
+      <li <?php echo $route->isActive($modulo,'Ventas');?>>
+        <a href="/ShopManager/panel/ventas/"><i class="fa fa-money"></i>Ventas</a>
+      </li>
+      <li <?php echo $route->isActive($modulo,'Entradas');?>>
+        <a href="/ShopManager/panel/entradas/"><i class="fa fa-file-text "></i>Entradas</a>
+      </li>
       <li <?php echo $route->isActive($modulo,'Examples');?>>
         <a href="/ShopManager/panel/examples.php"><i class="fa fa-table "></i>Examples</a>
       </li>
