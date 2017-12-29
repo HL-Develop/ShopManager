@@ -1,7 +1,12 @@
+<?php
+  require($_SERVER['DOCUMENT_ROOT'].'/ShopManager/controllers/route.php');
+  $route = new routes();
+  $modulo = $route->getModulo($_SERVER['REQUEST_URI']);
+?>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simple Responsive Admin</title>
+  <title>ShopManager|<?php echo $modulo;?></title>
 	<!-- BOOTSTRAP STYLES-->
   <link href="/ShopManager/panel/css/bootstrap.css" rel="stylesheet" />
   <!-- FONTAWESOME STYLES-->

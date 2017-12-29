@@ -1,8 +1,3 @@
-<?php
-  require($_SERVER['DOCUMENT_ROOT'].'/ShopManager/controllers/route.php');
-  $route = new routes();
-  $modulo = $route->getModulo($_SERVER['REQUEST_URI']);
-?>
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="adjust-nav">
     <div class="navbar-header">
@@ -23,7 +18,7 @@
 <nav class="navbar-default navbar-side" role="navigation">
   <div class="sidebar-collapse">
     <ul class="nav" id="main-menu">
-      <li <?php echo $route->isActive($modulo,'');?>>
+      <li <?php echo $route->isActive($modulo,'Inicio');?>>
         <a href="/ShopManager/panel/" ><i class="fa fa-home "></i>Inicio</a>
       </li>
       <li <?php echo $route->isActive($modulo,'Productos');?>>
