@@ -10,7 +10,7 @@ $( document ).ready(function() {
         $.ajax({
           url:'controllers/login.php',
           type:'POST',
-          data:{type:'login',usuario:user, contraseña:password},
+          data:{usuario:user, contraseña:password},
           success:function(response){
             if(response=='Exito'){
               alertify.alert('Exito!', 'Bienvenido al sistema',function(){ window.location='/ShopManager/panel/'; }).set('closable', false);

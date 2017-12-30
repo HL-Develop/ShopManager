@@ -1,11 +1,15 @@
 <?php
+require($_SERVER['DOCUMENT_ROOT'].'/ShopManager/models/conexion.php');
+
 class usuarioModel{
   private $con;
 
   function conectar(){
-    $this->con = new mysqli("localhost", "root", "", "shopmanager");
+    $db = new database();
+    $this->con = new mysqli($db->server, $db->user, $db->password, $db->database);
     if ($this->con->connect_errno) {
-        return false;
+    return "error conexion";
+      //  return false;
     }else{
       return true;
     }
