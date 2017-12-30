@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  if(isset($_SESSION['usuario'])){
+?>
 <!DOCTYPE html>
 <html>
   <?php include($_SERVER['DOCUMENT_ROOT'].'/ShopManager/panel/modules/head.php'); ?>
@@ -23,3 +27,8 @@
     <?php include($_SERVER['DOCUMENT_ROOT'].'/ShopManager/panel/modules/footer.php'); ?>
   </body>
 </html>
+<?php
+  }else{
+    header("Location: /ShopManager/");  
+  }
+?>

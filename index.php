@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  if(!isset($_SESSION['usuario'])){
+?>
 <!DOCTYPE html>
 <html>
   <?php include($_SERVER['DOCUMENT_ROOT'].'/ShopManager/panel/modules/head.php'); ?>
@@ -20,21 +24,35 @@
                     <span class="input-group-addon">
                       <i class="fa fa-user" aria-hidden="true"></i>
                     </span>
-                    <input type="text" class="form-control" placeholder="Usuario">
+                    <input id="usuario" type="text" class="form-control" placeholder="Usuario" required>
                   </div>
 
                   <div class="input-group">
                     <span class="input-group-addon">
                       <i class="fa fa-lock" aria-hidden="true"></i>
                     </span>
-                    <input type="password" class="form-control" placeholder="Contraseña">
+                    <input id="password" type="password" class="form-control" placeholder="Contraseña" required>
                   </div>
-                  <a href="#" class="btn btn-primary pull-right">Entrar</a>
+                  <button type="submit" id="sendLogin" class="btn btn-primary pull-right">Entrar</button>
                 </form>
               </div>
             </div>
           </div>
       </div>
     </div>
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="/ShopManager/panel/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="/ShopManager/panel/js/bootstrap.min.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="/ShopManager/panel/js/custom.js"></script>
+    <!-- FUNCTION SCRIPTS -->
+    <script src="/ShopManager/panel/js/function.js"></script>
   </body>
 </html>
+<?php
+  }else{
+    header("Location: /ShopManager/panel/");  
+  }
+?>
