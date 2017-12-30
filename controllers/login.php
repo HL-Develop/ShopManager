@@ -1,5 +1,6 @@
 <?php
 session_start();
+require($_SERVER['DOCUMENT_ROOT'].'/ShopManager/models/usuario.php');
 
 if(isset($_POST['usuario']) && isset($_POST['contraseña'])){
   $uc = new loginController();
@@ -9,12 +10,20 @@ if(isset($_POST['usuario']) && isset($_POST['contraseña'])){
 }
 //============================================================================//
 
+
 class loginController{
   function login($user, $password){
-
-    $_SESSION['usuario']=$user;
-
-    return 'Exito';
+      $um = new usuarioModel();
+      $usuario = $um->login($user, md5($password));
+      if(!$usuario){
+        return "Error";
+      }else{
+        $_SESSION['id'] = $usuario['id'];
+        $_SESSION['nombre'] = $usuario['nombre'];
+        $_SESSION['usuario'] = $usuario['usuario'];
+        $_SESSION['roll'] = $usuario['roll'];
+        return "Exito";
+      }
   }
 }
 ?>

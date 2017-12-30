@@ -13,6 +13,9 @@
   <link href="/ShopManager/panel/css/font-awesome.css" rel="stylesheet" />
   <!-- CUSTOM STYLES-->
   <link href="/ShopManager/panel/css/custom.css" rel="stylesheet" />
+  <!-- ALERTIFY STYLES-->
+  <link href="/ShopManager/panel/css/alertify.min.css" rel="stylesheet" />
+  <link href="/ShopManager/panel/css/themes/default.min.css" rel="stylesheet" />
   <!-- GOOGLE FONTS-->
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>

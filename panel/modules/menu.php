@@ -19,6 +19,15 @@
   <div class="sidebar-collapse">
     <ul class="nav" id="main-menu">
       <li <?php echo $route->isActive($modulo,'Inicio');?>>
+        <a href="#">
+          <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          <?php echo $_SESSION['usuario']; ?>
+          <br/>
+          <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          <?php echo $_SESSION['roll']; ?>
+        </a>
+      </li>
+      <li <?php echo $route->isActive($modulo,'Inicio');?>>
         <a href="/ShopManager/panel/" ><i class="fa fa-home "></i>Inicio</a>
       </li>
       <li <?php echo $route->isActive($modulo,'Productos');?>>

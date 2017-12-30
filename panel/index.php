@@ -29,6 +29,6 @@
 </html>
 <?php
   }else{
-    header("Location: /ShopManager/");  
+    header("Location: /ShopManager/");
   }
 ?>
