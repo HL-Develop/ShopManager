@@ -5,11 +5,11 @@
     </div>
   </div>
 </div>
-<!-- /. WRAPPER  -->
-<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 <!-- JQUERY SCRIPTS -->
 <script src="/ShopManager/panel/js/jquery-1.10.2.js"></script>
 <!-- BOOTSTRAP SCRIPTS -->
 <script src="/ShopManager/panel/js/bootstrap.min.js"></script>
 <!-- CUSTOM SCRIPTS -->
 <script src="/ShopManager/panel/js/custom.js"></script>
+<!-- FUNCTION SCRIPTS -->
+<script src="/ShopManager/panel/js/function.js"></script>
