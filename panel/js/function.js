@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+  console.log('ready');
     //========================================================================//
     $('#sendLogin').on('click',function(event){
       event.preventDefault();
@@ -26,4 +27,13 @@ $( document ).ready(function() {
         alertify.alert('Acceso denegado!', 'Llene todos los campos').set('closable', false);
       }
     })
+    //========================================================================//
+    $('a#sendLogout').on('click',function(event){
+      event.preventDefault();
+      alertify.alert('Adios!', 'Estas saliendo del sistema',
+        function(){
+          window.location='/ShopManager/controllers/logout.php';
+        }
+      ).set('closable', false);
+    });
 });

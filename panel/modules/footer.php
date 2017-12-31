@@ -11,5 +11,7 @@
 <script src="/ShopManager/panel/js/bootstrap.min.js"></script>
 <!-- CUSTOM SCRIPTS -->
 <script src="/ShopManager/panel/js/custom.js"></script>
+<!-- ALERTIFY SCRIPTS -->
+<script src="/ShopManager/panel/js/alertify.min.js"></script>
 <!-- FUNCTION SCRIPTS -->
 <script src="/ShopManager/panel/js/function.js"></script>

@@ -11,7 +11,7 @@
       </a>
     </div>
     <span class="logout-spn" >
-      <a href="/ShopManager/controllers/logout.php" style="color:#fff;"><i class="fa fa-sign-out" aria-hidden="true"></i> Salir</a>
+      <a id="sendLogout" href="#" style="color:#fff;"><i class="fa fa-sign-out" aria-hidden="true"></i> Salir</a>
     </span>
   </div>
 </div>

@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  if(isset($_SESSION['usuario'])){
+?>
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php include('modules/head.php'); ?>
@@ -288,3 +292,8 @@ This is a type of bare admin that means you can customize your own admin using t
 
 </body>
 </html>
+<?php
+  }else{
+    header("Location: /ShopManager/");
+  }
+?>
