@@ -22,7 +22,6 @@ body {
     padding: 15px 15px;
     min-height: 600px;
     background:#F3F3F3;
-
 }
 #page-inner {
     width:100%;
@@ -37,12 +36,10 @@ body {
 /*==============================================
     MENU STYLES
 =============================================*/
-
 .sidebar-collapse .nav {
 	padding:0;
     padding-top:50px;
 }
-
 .sidebar-collapse > .nav > li > a {
 	padding:15px 10px;
     color: #428bca;
@@ -54,24 +51,18 @@ font-size: 16px;
 }
 .sidebar-collapse .nav > li > a:hover,
 .sidebar-collapse .nav > li > a:focus {
-
 	background:#F3F3F3;
 	outline:0;
 }
-
 .navbar-side {
 	border:none;
 	background-color: #fff;
-
 }
 .navbar-inverse {
-
-background-color: #428bca;
-border-color: #F0F0F0;
-min-height: 80px;
+  background-color: #428bca;
+  border-color: #F0F0F0;
+  min-height: 80px;
 }
-
-
 .nav > li > a > i {
     margin-right:10px;
 }
@@ -83,16 +74,15 @@ min-height: 80px;
     margin:20px;
     margin: 10px 25px 10px 50px;
 }
-    .logout-spn a {
+.logout-spn a {
         text-decoration:none;
-    }
+}
 .active-link {
     background-color:#f3f3f3;
 }
-
 /*==============================================
     DASHBOARD STYLES
-    =============================================*/
+=============================================*/
 .div-square {
     padding:5px;
     border:3px double #e1e1e1;
@@ -100,16 +90,14 @@ min-height: 80px;
    -moz-border-radius:8px;
     border-radius:8px;
     margin:5px;
-
 }
-
 .div-square> a,.div-square> a:hover {
     color:#808080;
      text-decoration:none;
 }
 /*==============================================
     FOOTER STYLES
-    =============================================*/
+=============================================*/
 .footer {
     background-color:#428bca;
     width:100%;
@@ -117,42 +105,34 @@ min-height: 80px;
     padding:20px 50px 20px 50px;
      padding-left:20px;
 }
-
-
-    .footer > a, .footer>a:hover {
-
-        color:#fff;
-    }
-
+.footer > a, .footer>a:hover {
+    color:#fff;
+}
 /*==============================================
     MEDIA QUERIES
-    =============================================*/
-
+=============================================*/
  @media(min-width:768px) {
-     #page-wrapper{
-               margin: 0 0 0 260px;
+    #page-wrapper{
+        margin: 0 0 0 260px;
         padding: 15px 30px;
         min-height: 1050px;
-
     }
-
-
     .navbar-side {
         z-index: 1;
         position: absolute;
         width: 260px;
-
     }
-
-
 }
 /*==============================================
     ESTILOS PROPIOS
-    =============================================*/
+  =============================================*/
 th.th-center{
   text-align: center;
   background-color:#949494;
 }
 td.td-center{
   text-align: center;
+}
+input.error-input{
+  border-color: red;
 }

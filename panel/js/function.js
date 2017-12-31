@@ -3,10 +3,8 @@ $( document ).ready(function() {
     //========================================================================//
     $('#sendLogin').on('click',function(event){
       event.preventDefault();
-
       var user = $('input#usuario').val();
       var password = $('input#password').val();
-
       if(user!='' && password!=''){
         $.ajax({
           url:'controllers/login.php',
@@ -26,7 +24,12 @@ $( document ).ready(function() {
       }else{
         alertify.alert('Acceso denegado!', 'Llene todos los campos').set('closable', false);
       }
-    })
+    });
+    //========================================================================//
+    $('input').on('focusout',function(event){
+      event.preventDefault();
+      errorInput('input#'+$(this).attr('id'));
+    });
     //========================================================================//
     $('a#sendLogout').on('click',function(event){
       event.preventDefault();
@@ -37,3 +40,16 @@ $( document ).ready(function() {
       ).set('closable', false);
     });
 });
+//============================================================================//
+function errorInput(inputId){
+  if($(inputId).val()=='' || $(inputId).val()==undefined){
+    $(inputId).attr('data-toggle','popover');
+    $(inputId).attr('data-placement','top');
+    $(inputId).attr('data-content','Completa este campo');
+    $(inputId).addClass('error-input');
+    $(inputId).popover('show');
+  }else{
+    $(inputId).removeClass('error-input');
+    $(inputId).popover('hide');
+  }
+}
