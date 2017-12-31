@@ -18,7 +18,7 @@
 <nav class="navbar-default navbar-side" role="navigation">
   <div class="sidebar-collapse">
     <ul class="nav" id="main-menu">
-      <li <?php echo $route->isActive($modulo,'Inicio');?>>
+      <li>
         <a href="#">
           <i class="fa fa-chevron-right" aria-hidden="true"></i>
           <?php echo $_SESSION['usuario']; ?>
