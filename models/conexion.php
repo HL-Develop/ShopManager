@@ -5,4 +5,5 @@
     public $password = "";
     public $database = "shopmanager";
   }
+  $db = new database();
  ?>

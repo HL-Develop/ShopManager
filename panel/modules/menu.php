@@ -39,12 +39,6 @@
       <li <?php echo $route->isActive($modulo,'Entradas');?>>
         <a href="/ShopManager/panel/entradas/"><i class="fa fa-file-text "></i>Entradas</a>
       </li>
-      <li <?php echo $route->isActive($modulo,'Examples');?>>
-        <a href="/ShopManager/panel/examples.php"><i class="fa fa-table "></i>Examples</a>
-      </li>
-      <li <?php echo $route->isActive($modulo,'Blank');?>>
-        <a href="/ShopManager/panel/blank.php"><i class="fa fa-edit "></i>Blank Page</a>
-      </li>
     </ul>
   </div>
 </nav>

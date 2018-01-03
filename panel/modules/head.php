@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShopManager|<?php echo $modulo;?></title>
+  <title>SM | <?php echo $modulo;?></title>
 	<!-- BOOTSTRAP STYLES-->
   <link href="/ShopManager/panel/css/bootstrap.css" rel="stylesheet" />
   <!-- FONTAWESOME STYLES-->

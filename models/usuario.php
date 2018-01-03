@@ -1,6 +1,7 @@
 <?php
-require($_SERVER['DOCUMENT_ROOT'].'/ShopManager/models/conexion.php');
-
+  if(!isset($db)){
+    require($_SERVER['DOCUMENT_ROOT'].'/ShopManager/models/conexion.php');
+  }
 class usuarioModel{
   private $con;
 

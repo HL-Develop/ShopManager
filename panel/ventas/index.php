@@ -4,7 +4,9 @@
 ?>
 ﻿<!DOCTYPE html>
 <html>
-  <?php include($_SERVER['DOCUMENT_ROOT'].'/ShopManager/panel/modules/head.php'); ?>
+  <?php
+    include($_SERVER['DOCUMENT_ROOT'].'/ShopManager/panel/modules/head.php');
+  ?>
   <body>
     <div id="wrapper">
       <?php include($_SERVER['DOCUMENT_ROOT'].'/ShopManager/panel/modules/menu.php'); ?>
@@ -73,7 +75,7 @@
                 <div class="form-group">
                   <label></label>
                   <button name="save-btn" id="save-btn" type="submit"  class="btn btn-primary btn-lg btn-block pull-right">
-                    <i></i>  Generar venta
+                    <i class="fa fa-usd" aria-hidden="true"></i>  Cobrar
                   </button>
                 </div>
             </div>
