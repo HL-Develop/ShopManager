@@ -1,7 +1,6 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'].'/ShopManager/models/producto.php');
 require($_SERVER['DOCUMENT_ROOT'].'/ShopManager/models/categoria.php');
-require($_SERVER['DOCUMENT_ROOT'].'/ShopManager/models/proveedor.php');
 
 //============================================================================//
 if(isset($_POST['type'])){
@@ -19,6 +18,10 @@ class ProductoController{
           break;
         case 'agregar':
             $respuesta = $this->agregarProducto($_POST['producto']);
+            return $respuesta;
+            break;
+        case 'modificar':
+            $respuesta = $this->modificarProducto($_POST['producto'],$_POST['id']);
             return $respuesta;
             break;
         default:
@@ -39,23 +42,26 @@ class ProductoController{
     return $lista;
   }
 
-  function listarProveedoresActivos(){
-    $pm = new ProveedorModel();
-    $lista = $pm->listarProveedoresActivos();
-    return $lista;
-  }
-
   function agregarProducto($producto){
-    $decoded = json_decode($producto,true);
-    $query = "INSERT INTO producto (";
-    $query2 = ") VALUES (";
-    foreach ($decoded as $value) {
-      $query.= $value["name"].',';
-      $query2.= '"'.$value["value"].'",';
-    }
-
-    return substr($query,0,-1).substr($query2,0,-1).');';
+    $formData = json_decode($producto,true);
+    $pm = new ProductoModel();
+    $agregar = $pm->agregarProducto($formData);
+    return $agregar;
   }
+
+  function datosProducto($id){
+    $pm = new ProductoModel();
+    $datos = $pm->datosProducto($id);
+    return $datos;
+  }
+
+  function modificarProducto($producto,$id){
+    $formData = json_decode($producto,true);
+    $pm = new ProductoModel();
+    $modificar = $pm->modificarProducto($formData,$id);
+    return $modificar;
+  }
+
   function eliminarProducto($producto){
     $pm = new ProductoModel();
     $eliminar = $pm->eliminar($producto);

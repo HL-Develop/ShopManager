@@ -18,7 +18,7 @@ if(!isset($db)){
 
     function listarProductosActivos(){
       if($this->conectar()){
-        $query = "SELECT categorias.nombre as categoria,codigo,descripcion,stock, precio, productos.id 
+        $query = "SELECT categorias.nombre as categoria,codigo,descripcion,stock, precio, productos.id
         FROM productos INNER JOIN categorias ON productos.categoria=categorias.id
         WHERE productos.status=1 ORDER BY categoria";
         $resultado = $this->con->query($query);
@@ -32,6 +32,65 @@ if(!isset($db)){
         return false;
       }
     }
+
+    function agregarProducto($producto){
+      $firts = "INSERT INTO productos (";
+      $last = ") VALUES (";
+      foreach ($producto as $value) {
+        $firts.= $value["name"].',';
+        $last.= '"'.$value["value"].'",';
+      }
+      $query = substr($firts,0,-1).substr($last,0,-1).');';
+      if($this->conectar()){
+        $resultado = $this->con->query($query);
+        if($this->con->affected_rows==1){
+          return 'Exito';
+        }else{
+          return false;
+        }
+        $this->con->close();
+      }else{
+        return false;
+      }
+    }
+
+    function datosProducto($id){
+      if($this->conectar()){
+        $query = "SELECT categorias.nombre as categoria,codigo,descripcion,precio, productos.id as pid, categorias.id as cid
+        FROM productos INNER JOIN categorias ON productos.categoria=categorias.id
+        WHERE productos.id=".$id;
+        $resultado = $this->con->query($query);
+        if($resultado->num_rows==1){
+          return $resultado->fetch_assoc();
+        }else{
+          return false;
+        }
+        $this->con->close();
+      }else{
+        return false;
+      }
+    }
+
+    function modificarProducto($producto,$id){
+      $query = "UPDATE productos SET ";
+      foreach ($producto as $value) {
+        $query.= $value["name"].'="'.$value["value"].'",';
+
+      }
+      $query = substr($query,0,-1).' WHERE id = '.$id.';';
+      if($this->conectar()){
+        $resultado = $this->con->query($query);
+        if($this->con->affected_rows==1){
+          return 'Exito';
+        }else{
+          return false;
+        }
+        $this->con->close();
+      }else{
+        return false;
+      }
+    }
+
 
     function eliminar($id){
       if($this->conectar()){

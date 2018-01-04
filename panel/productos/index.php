@@ -23,9 +23,9 @@
           <div class="row">
             <div class="col-lg-4 col-md-4">
               <div class="input-group">
-                <input name="proveedor" id="proveedor" type="text" required class="form-control">
+                <input name="buscar-producto" id="buscar-producto" type="text" required class="form-control">
                 <span class="input-group-addon">
-                  <i class="fa fa-search" aria-hidden="true"></i>
+                  <i class="fa fa-search buscar-producto" aria-hidden="true"></i>
                 </span>
               </div>
             </div>

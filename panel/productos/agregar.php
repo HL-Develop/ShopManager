@@ -9,7 +9,6 @@
     include($_SERVER['DOCUMENT_ROOT'].'/ShopManager/controllers/producto.php');
     $producto = new ProductoController();
     $categorias = $producto->listarCategoriasActivas();
-    $proveedores = $producto->listarProveedoresActivos();
   ?>
   <body>
     <div id="wrapper">
@@ -29,28 +28,12 @@
               <div class="col-lg-4 col-md-4">
                 <div class="form-group">
                   <label>Categoria</label>
-                  <select name="" id="" required class="form-control">
+                  <select name="categoria" id="categoria" required class="form-control">
                     <option>Seleccionar...</option>
                     <?php
                       while($c = $categorias->fetch_assoc()){
                     ?>
-                      <option><?php echo $c['nombre']; ?></option>
-                    <?php
-                      }
-                    ?>
-                  </select>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-4">
-                <div class="form-group">
-                  <label>Proveedor</label>
-                  <select name="" id="" required class="form-control">
-                    <option>Seleccionar...</option>
-                    <?php
-                      while($p = $proveedores->fetch_assoc()){
-                    ?>
-                      <option><?php echo $p['nombre']; ?></option>
+                      <option name="categoria" value="<?php echo $c['id']; ?>"><?php echo $c['nombre']; ?></option>
                     <?php
                       }
                     ?>
