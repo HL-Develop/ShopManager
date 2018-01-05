@@ -43,7 +43,7 @@
           <hr/>
           <!-- Tabla de venta -->
           <div class="row">
-            <div class="col-lg-12 col-md-6">
+            <div class="col-lg-12 col-md-12">
               <table class="table table-striped table-bordered table-hover">
                 <caption>Nota de venta</caption>
                 <thead>
@@ -63,7 +63,7 @@
                     <td>Coca Cola 500-ml Vidrio</td>
                     <td>$ 8.00</td>
                     <td>$ 8.00</td>
-                    <td class="td-center"><i class="fa fa-times text-danger" aria-hidden="true"></i></td>
+                    <td class="td-center eliminar-tupla"><i class="fa fa-times text-danger" aria-hidden="true"></i></td>
                   </tr>
                 </tbody>
               </table>

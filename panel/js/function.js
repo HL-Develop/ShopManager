@@ -72,6 +72,10 @@ $( document ).ready(function() {
         var categoria = $('#buscar-categoria').val();
         buscarProducto(categoria,palabra);
       });
+    /* ************************FUNCIONES DE MODULO VENTAS******************** */
+      $('.eliminar-tupla').on('click',function(event){
+        $(this).closest('tr').remove();
+      });
 });
 //============================================================================//
 function buscarProducto(categoria,palabra){

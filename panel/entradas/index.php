@@ -91,7 +91,7 @@
                     <td>Coca Cola 500-ml Vidrio</td>
                     <td>$ 8.00</td>
                     <td>$ 8.00</td>
-                    <td class="td-center"><i class="fa fa-times text-danger" aria-hidden="true"></i></td>
+                    <td class="td-center eliminar-tupla"><i class="fa fa-times text-danger" aria-hidden="true"></i></td>
                   </tr>
                 </tbody>
               </table>
