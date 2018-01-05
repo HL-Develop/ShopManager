@@ -53,7 +53,9 @@ $( document ).ready(function() {
       $('#producto-agregar').on('click',function(event){
         event.preventDefault();
         var datos = JSON.stringify($('#producto-agregar-form').serializeArray());
-        agregarProducto(datos);
+        if(validaForm()){
+          agregarProducto(datos);
+        }
       });
       //======================================================================//
       $('#producto-modificar').on('click',function(event){
