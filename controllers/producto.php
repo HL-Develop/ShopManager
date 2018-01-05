@@ -24,6 +24,10 @@ class ProductoController{
             $respuesta = $this->modificarProducto($_POST['producto'],$_POST['id']);
             return $respuesta;
             break;
+        case 'consultar':
+            $respuesta = $this->consultarProductos($_POST['en'],$_POST['buscar']);
+            return $respuesta;
+            break;
         default:
           return 'Error';
           break;
@@ -34,6 +38,21 @@ class ProductoController{
     $pm = new productoModel();
     $lista = $pm->listarProductosActivos();
     return $lista;
+  }
+
+  function consultarProductos($categoria,$buscar){
+    $pm = new productoModel();
+    if($buscar=='' && $categoria==0){ //todos los productos de todas las categorias
+      $consulta = $pm->listarProductosActivos();
+    }else{
+      $consulta = $pm->consultarProductos($categoria,$buscar);
+    }
+    $objArray = array();
+    while($fila=$consulta->fetch_assoc()){
+      array_push($objArray, $fila);
+    }
+    $objJSON = json_encode($objArray,JSON_FORCE_OBJECT);
+    return   $objJSON;
   }
 
   function listarCategoriasActivas(){

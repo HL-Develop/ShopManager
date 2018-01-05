@@ -33,6 +33,31 @@ if(!isset($db)){
       }
     }
 
+    function consultarProductos($categoria,$buscar){
+      if($categoria==0){
+        $where ="(productos.codigo='".$buscar."' OR productos.descripcion like '%".$buscar."%')";
+      }else if ($buscar=='') {
+        $where ="categorias.id=".$categoria;
+      }else{
+        $where ="categorias.id=".$categoria." AND (productos.codigo='".$buscar."' OR productos.descripcion like '%".$buscar."%')";
+      }
+      if($this->conectar()){
+        $query = "SELECT categorias.nombre as categoria,codigo,descripcion,stock, precio, productos.id
+            FROM productos INNER JOIN categorias ON productos.categoria=categorias.id
+            WHERE productos.status=1 AND ".$where." ORDER BY categoria;";
+        $resultado = $this->con->query($query);
+        $this->con->close();
+        
+        if($resultado->num_rows==0){
+          return false;
+        }else{
+          return $resultado;
+        }
+      }else{
+        return false;
+      }
+    }
+
     function agregarProducto($producto){
       $firts = "INSERT INTO productos (";
       $last = ") VALUES (";
@@ -90,7 +115,6 @@ if(!isset($db)){
         return false;
       }
     }
-
 
     function eliminar($id){
       if($this->conectar()){

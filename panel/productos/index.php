@@ -9,6 +9,7 @@
     include($_SERVER['DOCUMENT_ROOT'].'/ShopManager/controllers/producto.php');
     $producto = new ProductoController();
     $lista = $producto->listarProductosActivos();
+    $categorias = $producto->listarCategoriasActivas();
   ?>
   <body>
     <div id="wrapper">
@@ -20,23 +21,36 @@
               <h1>Productos</h1>
             </div>
           </div>
+          <hr/>
           <div class="row">
-            <div class="col-lg-4 col-md-4">
-              <div class="input-group">
-                <input name="buscar-producto" id="buscar-producto" type="text" required class="form-control">
-                <span class="input-group-addon">
-                  <i class="fa fa-search buscar-producto" aria-hidden="true"></i>
-                </span>
+
+            <div class="col-lg-8 col-md-8">
+              <div class="form-group">
+                <div class="col-lg-6 col-md-6">
+                  <select name="buscar-categoria" id="buscar-categoria" class="form-control" required >
+                    <option name="buscar-categoria" value="0">Todas las categorias</option>
+                    <?php while($c = $categorias->fetch_assoc()){ ?>
+                      <option name="buscar-categoria" value="<?php echo $c['id']; ?>">Solo <?php echo $c['nombre']; ?></option>
+                    <?php   }   ?>
+                  </select>
+                </div>
+                <div class="input-group">
+                  <input name="buscar-producto" id="buscar-producto" class="form-control" type="text" placeholder="Ingrese nombre o código" required >
+                  <span class="input-group-addon buscar-producto">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </span>
+                </div>
               </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-md-offset-4">
-              <br/>
+
+            <div class="col-lg-4 col-md-4">
               <div class="input-group">
-                <button id="ir-nuevo-producto" type="submit"  class="btn btn-primary btn-lg btn-block">
+                <button id="ir-nuevo-producto" type="submit"  class="btn btn-primary btn-lg btn-block pull-right">
                   <i class="fa fa-plus" aria-hidden="true"></i> Agregar Producto
                 </button>
               </div>
             </div>
+
           </div>
           <hr/>
           <?php
@@ -47,7 +61,7 @@
             }else{
           ?>
           <div class="row">
-            <div class="col-lg-12 col-md-6 table-responsive-sm">
+            <div class="col-lg-12 col-md-12 table-responsive-sm">
               <table class="table table-striped table-bordered table-hover">
                 <caption>Lista de productos</caption>
                 <thead>
