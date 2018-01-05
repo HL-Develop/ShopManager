@@ -136,3 +136,6 @@ td.td-center{
 input.error-input{
   border-color: red;
 }
+select.error-select{
+  border-color: red;
+}

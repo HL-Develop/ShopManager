@@ -30,7 +30,7 @@
                 <div class="form-group">
                   <label>Categoria</label>
                   <select name="categoria" id="categoria" required class="form-control">
-                    <option>Seleccionar...</option>
+                    <option value="">Seleccionar...</option>
                     <?php
                       while($c = $categorias->fetch_assoc()){
                     ?>

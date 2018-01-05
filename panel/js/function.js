@@ -62,26 +62,9 @@ $( document ).ready(function() {
         event.preventDefault();
         var datos = JSON.stringify($('#producto-modificar-form').serializeArray());
         var pid=$('input#id').attr('value');
-        console.log('id='+pid);
-        $.ajax({
-          url:'../../controllers/producto.php',
-          type:'POST',
-          data:{type:'modificar',producto:datos,id:pid},
-          success:function(response){
-            if(response=='Exito'){
-              alertify.alert('Exito!', 'Producto modificado',
-                function(){
-                  window.location='/ShopManager/panel/productos';
-                }).set('closable', false);
-            }else{
-              alertify.error('<h4>'+errorLabel+'No se modificó el producto</h4>');
-            }
-          },
-          error:function(error){
-            console.log(error);
-            alertify.error('<h4>'+errorLabel+'No se modificó el producto</h4>');
-          }
-        });
+        if(validaForm()){
+          modificarProducto(datos, pid);
+        }
       });
       //======================================================================//
       $('.buscar-producto').on('click',function(event){
@@ -124,7 +107,10 @@ function buscarProducto(categoria,palabra){
 function validaForm(){
   var valid = true;
   $('input').removeClass('error-input');
-  $(this).popover('hide');
+  $('input').popover('hide');
+  $('select').removeClass('error-select');
+  $('select').popover('hide');
+
   $('input').each(function(){
     if(isRequire($(this)) && isEmpty($(this)) ){
       $(this).attr('data-toggle','popover');
@@ -133,8 +119,16 @@ function validaForm(){
       $(this).addClass('error-input');
       $(this).popover('show');
       valid = false;
-    }else{
-
+    }
+  });
+  $('select').each(function(){
+    if(isRequire($(this)) && isEmpty($(this)) ){
+      $(this).attr('data-toggle','popover');
+      $(this).attr('data-placement','top');
+      $(this).attr('data-content','Completa este campo');
+      $(this).addClass('error-select');
+      $(this).popover('show');
+      valid = false;
     }
   });
   return valid;
@@ -216,6 +210,28 @@ function agregarProducto(datos){
     error:function(error){
       console.log(error);
       alertify.error('<h4>'+errorLabel+'No se agregó el producto</h4>');
+    }
+  });
+}
+//============================================================================//
+function modificarProducto(datos, pid){
+  $.ajax({
+    url:'../../controllers/producto.php',
+    type:'POST',
+    data:{type:'modificar',producto:datos,id:pid},
+    success:function(response){
+      if(response=='Exito'){
+        alertify.alert('Exito!', 'Producto modificado',
+          function(){
+            window.location='/ShopManager/panel/productos';
+          }).set('closable', false);
+      }else{
+        alertify.error('<h4>'+errorLabel+'No se modificó el producto</h4>');
+      }
+    },
+    error:function(error){
+      console.log(error);
+      alertify.error('<h4>'+errorLabel+'No se modificó el producto</h4>');
     }
   });
 }

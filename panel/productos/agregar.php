@@ -28,8 +28,8 @@
               <div class="col-lg-4 col-md-4">
                 <div class="form-group">
                   <label>Categoria</label>
-                  <select name="categoria" id="categoria" required class="form-control">
-                    <option>Seleccionar...</option>
+                  <select name="categoria" id="categoria" class="form-control" required >
+                    <option value="">Seleccionar...</option>
                     <?php
                       while($c = $categorias->fetch_assoc()){
                     ?>
