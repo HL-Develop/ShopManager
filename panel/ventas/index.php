@@ -32,16 +32,16 @@
                   </span>
                 </div>
             </div>
-              <div class="col-lg-4 col-md-4 col-md-offset-4">
-                <div class="panel panel-primary">
-                  <div class="panel-heading">
-                    Total Venta
-                  </div>
-                  <div class="panel-body">
-                    <h1 id="total-venta">$ 0.00</h1>
-                  </div>
+            <div class="col-lg-4 col-md-4 col-md-offset-4">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  Total Venta
+                </div>
+                <div class="panel-body">
+                  <h1 id="total-venta">$ 0.00</h1>
                 </div>
               </div>
+            </div>
           </div>
           <hr/>
           <!-- Tabla de venta -->
@@ -65,7 +65,7 @@
               </table>
             </div>
           </div>
-          <!--Botón de guardar-->
+          <!--Botón de cobrar-->
           <div class="row">
             <div class="col-lg-4 col-md-4 col-md-offset-8">
                 <div class="form-group">

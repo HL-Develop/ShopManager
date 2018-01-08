@@ -88,8 +88,21 @@ $( document ).ready(function() {
         }else{
 
         }
+        $('#table-venta tr').each(function(){
+          console.log('tupla');
+        });
       });
+      //======================================================================//
+      $('#table-venta tr').on('click',function() {
+        console.log('click on table tr');
+          $(this).children("td").on('click',function(){
+            console.log("click on td");
+          })
+
+      })
+
 });
+
 //============================================================================//
 function buscarProducto(categoria,palabra){
   $.ajax({
@@ -274,22 +287,23 @@ function addItemVenta(producto){
   var tupla ='<tr>';
   tupla+= '<td class="td-center">'+producto.codigo+'</td>';
   tupla+= '<td>'+producto.descripcion+'</td>';
-  tupla+='<td class="td-center"><input id="cantidadVenta" type="number" min="1" onchange="'+echoOnchangeVenta()+'" value="1"/></td>';
-  tupla+= '<td class="td-center">$ '+producto.precio+'</td>';
-  tupla+= '<td class="td-center">$ '+producto.precio+'</td>';
-  tupla+= '<td onclick="$(this).closest(\'tr\').remove();" class="td-center"><i class="fa fa-times fa-2x text-danger" aria-hidden="true"></i></td>';
+  tupla+='<td class="td-center" ><input id="'+producto.id+'" type="number" min="1" onchange="'+echoOnchangeVenta()+'" value="1"/></td>';
+  tupla+= '<td id="precio'+producto.id+'" class="td-center">$ '+producto.precio+'</td>';
+  tupla+= '<td id="total'+producto.id+'" class="td-center">$ '+producto.precio+'</td>';
+  tupla+= '<td onclick="$(this).closest(\'tr\').remove();" class="td-center delete-item-venta"><i class="fa fa-times fa-2x text-danger" aria-hidden="true"></i></td>';
   tupla+= '</tr>';
   $('tbody').append(tupla);
 }
+//============================================================================//
 function echoOnchangeVenta(){
-  var cadena = "alert();";
+  var cadena ="$('td#total'+$(this).attr('id')).html('$ '+parseFloat(parseFloat($('td#precio'+$(this).attr('id')).html().replace('$ ',''))*parseFloat($(this).val())).toFixed(2));";
   return cadena;
 }
 //============================================================================//
 function calculaTotalVenta(precio){
   var total = parseFloat('0.00').toFixed(2);
   $('h1#total-venta').empty();
-  $('h1#total-venta').append('$ '+parseFloat(total));
+  $('h1#total-venta').append('$ '+total);
 }
 
 }
