@@ -73,8 +73,21 @@ $( document ).ready(function() {
         buscarProducto(categoria,palabra);
       });
     /* ************************FUNCIONES DE MODULO VENTAS******************** */
-      $('.eliminar-tupla').on('click',function(event){
-        $(this).closest('tr').remove();
+      $('input#producto').on('keypress',function(event){
+        if(event.charCode==13){
+          getProducto();
+        }
+      });
+      $('.agregar-venta').on('click',function(event){
+          getProducto();
+      });
+      //======================================================================//
+      $('.btn-vender').on('click',function(event){
+        if($('#table-venta tr').length==1){
+          alertify.error('<h4>'+errorLabel+'No hay productos por cobrar.</h4>');
+        }else{
+
+        }
       });
 });
 //============================================================================//
@@ -212,7 +225,6 @@ function agregarProducto(datos){
       }
     },
     error:function(error){
-      console.log(error);
       alertify.error('<h4>'+errorLabel+'No se agregó el producto</h4>');
     }
   });
@@ -234,8 +246,50 @@ function modificarProducto(datos, pid){
       }
     },
     error:function(error){
-      console.log(error);
       alertify.error('<h4>'+errorLabel+'No se modificó el producto</h4>');
     }
   });
+}
+//============================================================================//
+function getProducto(){
+  var codigo = $('input#producto').val();
+  $.ajax({
+    url:'../../controllers/producto.php',
+    type:'POST',
+    data:{type:'getProducto',producto:codigo},
+    success:function(response){
+      if(response=='0'){
+        console.log('Buscar producto');
+      }else{
+        addItemVenta(JSON.parse(response));
+        calculaTotalVenta(JSON.parse(response).precio);
+      }
+    },
+    error:function(error){
+      alertify.error('<h4>'+errorLabel+'No se modificó el producto</h4>');
+    }
+  });
+//============================================================================//
+function addItemVenta(producto){
+  var tupla ='<tr>';
+  tupla+= '<td class="td-center">'+producto.codigo+'</td>';
+  tupla+= '<td>'+producto.descripcion+'</td>';
+  tupla+='<td class="td-center"><input id="cantidadVenta" type="number" min="1" onchange="'+echoOnchangeVenta()+'" value="1"/></td>';
+  tupla+= '<td class="td-center">$ '+producto.precio+'</td>';
+  tupla+= '<td class="td-center">$ '+producto.precio+'</td>';
+  tupla+= '<td onclick="$(this).closest(\'tr\').remove();" class="td-center"><i class="fa fa-times fa-2x text-danger" aria-hidden="true"></i></td>';
+  tupla+= '</tr>';
+  $('tbody').append(tupla);
+}
+function echoOnchangeVenta(){
+  var cadena = "alert();";
+  return cadena;
+}
+//============================================================================//
+function calculaTotalVenta(precio){
+  var total = parseFloat('0.00').toFixed(2);
+  $('h1#total-venta').empty();
+  $('h1#total-venta').append('$ '+parseFloat(total));
+}
+
 }

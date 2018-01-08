@@ -23,19 +23,22 @@
             <div class="col-lg-4 col-md-4">
                 <label>Producto</label>
                 <div class="input-group">
-                  <input name="proveedor" id="proveedor" type="text" required class="form-control">
+                  <input name="producto" id="producto" type="text" required class="form-control">
+                  <span class="input-group-addon agregar-venta">
+                    <i class="fa fa-plus text-success" aria-hidden="true"></i>
+                  </span>
                   <span class="input-group-addon">
-                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <i class="fa fa-search text-primary" aria-hidden="true"></i>
                   </span>
                 </div>
             </div>
-              <div class="col-lg-3 col-md-3 col-md-offset-3">
+              <div class="col-lg-4 col-md-4 col-md-offset-4">
                 <div class="panel panel-primary">
                   <div class="panel-heading">
                     Total Venta
                   </div>
                   <div class="panel-body">
-                    <h1>$ 500.00</h1>
+                    <h1 id="total-venta">$ 0.00</h1>
                   </div>
                 </div>
               </div>
@@ -44,27 +47,20 @@
           <!-- Tabla de venta -->
           <div class="row">
             <div class="col-lg-12 col-md-12">
-              <table class="table table-striped table-bordered table-hover">
+              <table id="table-venta" class="table table-striped table-bordered table-hover">
                 <caption>Nota de venta</caption>
                 <thead>
                   <tr>
-                    <th class="th-center">Cantidad</th>
                     <th class="th-center">Codigo</th>
                     <th class="th-center">Descripcion</th>
+                    <th class="th-center">Cantidad</th>
                     <th class="th-center">Precio Unitario</th>
                     <th class="th-center">Total</th>
                     <th class="th-center">Eliminar</th
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="td-center">1</td>
-                    <td class="td-center">75004699</td>
-                    <td>Coca Cola 500-ml Vidrio</td>
-                    <td>$ 8.00</td>
-                    <td>$ 8.00</td>
-                    <td class="td-center eliminar-tupla"><i class="fa fa-times text-danger" aria-hidden="true"></i></td>
-                  </tr>
+
                 </tbody>
               </table>
             </div>
@@ -74,7 +70,7 @@
             <div class="col-lg-4 col-md-4 col-md-offset-8">
                 <div class="form-group">
                   <label></label>
-                  <button name="save-btn" id="save-btn" type="submit"  class="btn btn-primary btn-lg btn-block pull-right">
+                  <button name="save-btn" id="save-btn" type="submit"  class="btn btn-primary btn-lg btn-block pull-right btn-vender">
                     <i class="fa fa-usd" aria-hidden="true"></i>  Cobrar
                   </button>
                 </div>

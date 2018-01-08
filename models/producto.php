@@ -47,7 +47,7 @@ if(!isset($db)){
             WHERE productos.status=1 AND ".$where." ORDER BY categoria;";
         $resultado = $this->con->query($query);
         $this->con->close();
-        
+
         if($resultado->num_rows==0){
           return false;
         }else{
@@ -128,6 +128,23 @@ if(!isset($db)){
         $this->con->close();
       }else{
         return false;
+      }
+    }
+
+    function getProducto($codigo){
+      if($this->conectar()){
+        $query = "SELECT codigo,descripcion,stock, precio, productos.id
+            FROM productos
+            WHERE productos.status=1 AND productos.codigo='".$codigo."';";
+        $resultado = $this->con->query($query);
+        $this->con->close();
+        if($resultado->num_rows==1){
+          return $resultado->fetch_assoc();
+        }else{
+          return 0;
+        }
+      }else{
+        return 0;
       }
     }
   }

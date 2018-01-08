@@ -28,6 +28,10 @@ class ProductoController{
             $respuesta = $this->consultarProductos($_POST['en'],$_POST['buscar']);
             return $respuesta;
             break;
+        case 'getProducto':
+            $respuesta = $this->getProducto($_POST['producto']);
+            return $respuesta;
+            break;
         default:
           return 'Error';
           break;
@@ -55,6 +59,11 @@ class ProductoController{
     return   $objJSON;
   }
 
+  function getProducto($codigo){
+    $pm = new productoModel();
+    $producto = $pm->getProducto($codigo);
+    return   json_encode($producto,JSON_FORCE_OBJECT);
+  }
   function listarCategoriasActivas(){
     $cm = new CategoriaModel();
     $lista = $cm->listarCategoriasActivas();
