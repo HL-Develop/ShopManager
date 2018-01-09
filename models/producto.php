@@ -33,6 +33,23 @@ if(!isset($db)){
       }
     }
 
+    function listarProductosExistentes(){
+      if($this->conectar()){
+        $query = "SELECT categorias.nombre as categoria,codigo,descripcion,stock, precio, productos.id
+        FROM productos INNER JOIN categorias ON productos.categoria=categorias.id
+        WHERE productos.status=1 AND productos.stock>0 ORDER BY categoria";
+        $resultado = $this->con->query($query);
+        $this->con->close();
+        if($resultado->num_rows==0){
+          return false;
+        }else{
+          return $resultado;
+        }
+      }else{
+        return false;
+      }
+    }
+
     function consultarProductos($categoria,$buscar){
       if($categoria==0){
         $where ="(productos.codigo='".$buscar."' OR productos.descripcion like '%".$buscar."%')";
@@ -135,7 +152,7 @@ if(!isset($db)){
       if($this->conectar()){
         $query = "SELECT codigo,descripcion,stock, precio, productos.id
             FROM productos
-            WHERE productos.status=1 AND productos.codigo='".$codigo."';";
+            WHERE productos.status=1 AND productos.stock>0 AND productos.codigo='".$codigo."';";
         $resultado = $this->con->query($query);
         $this->con->close();
         if($resultado->num_rows==1){

@@ -43,6 +43,11 @@ class ProductoController{
     $lista = $pm->listarProductosActivos();
     return $lista;
   }
+  function listarProductosExistentes(){
+    $pm = new productoModel();
+    $lista = $pm->listarProductosExistentes();
+    return $lista;
+  }
 
   function consultarProductos($categoria,$buscar){
     $pm = new productoModel();

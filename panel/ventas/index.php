@@ -6,6 +6,9 @@
 <html>
   <?php
     include($_SERVER['DOCUMENT_ROOT'].'/ShopManager/panel/modules/head.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/ShopManager/controllers/producto.php');
+    $producto = new ProductoController();
+    $lista = $producto->listarProductosExistentes();
   ?>
   <body>
     <div id="wrapper">
@@ -21,18 +24,30 @@
           <!-- formulario de captura -->
           <div class="row">
             <div class="col-lg-4 col-md-4">
-                <label>Producto</label>
-                <div class="input-group">
-                  <input name="producto" id="producto" type="text" required class="form-control">
-                  <span class="input-group-addon agregar-venta">
-                    <i class="fa fa-plus text-success" aria-hidden="true"></i>
-                  </span>
-                  <span class="input-group-addon">
-                    <i class="fa fa-search text-primary" aria-hidden="true"></i>
-                  </span>
-                </div>
+              <label>Ingresar producto por código</label>
+              <div class="input-group">
+                <input name="producto" id="producto" type="text" class="form-control"required>
+                <span class="input-group-addon agregar-venta">
+                  <i class="fa fa-plus text-success" aria-hidden="true"></i>
+                </span>
+              </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-md-offset-4">
+            <div class="col-lg-4 col-md-4">
+              <label>Buscar producto por nombre</label>
+              <div class="input-group">
+                <select id="listProductos" class="form-control">
+                  <option value="" >Selecciona una opción</option>
+                  <?php
+                      while ($fila=$lista->fetch_assoc()) {
+                  ?>
+                      <option value="<?php echo $fila['codigo']; ?>"><?php echo $fila['descripcion']; ?></option>
+                  <?php
+                      }
+                  ?>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
               <div class="panel panel-primary">
                 <div class="panel-heading">
                   Total Venta

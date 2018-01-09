@@ -17,8 +17,8 @@ $( document ).ready(function() {
           function(){
             window.location='/ShopManager/controllers/logout.php';
           }
-      ).set('closable', false);
-    });
+        ).set('closable', false);
+      });
     /* ***********************FUNCIONES DE MODULO PRODUCTOS****************** */
       $('#ir-nuevo-producto').on('click',function(event){
         event.preventDefault();
@@ -74,12 +74,24 @@ $( document ).ready(function() {
       });
     /* ************************FUNCIONES DE MODULO VENTAS******************** */
       $('input#producto').on('keypress',function(event){
-        if(event.charCode==13){
+        if(event.charCode==13 || event.charCode==0){
           getProducto();
         }
       });
       $('.agregar-venta').on('click',function(event){
           getProducto();
+      });
+      $('select#listProductos').on('change',function(event){
+        var codigo = $(this).val();
+        $('input#producto').val(codigo);
+        $('input#producto').focus();
+        $(this).val('');
+        getProducto();
+        alertify.success(successLabel+'Producto Agregado.');
+      });
+      //======================================================================//
+      $('h1#total-venta').on('click',function(event){
+        calculaTotalVenta();
       });
       //======================================================================//
       $('.btn-vender').on('click',function(event){
@@ -88,18 +100,9 @@ $( document ).ready(function() {
         }else{
 
         }
-        $('#table-venta tr').each(function(){
-          console.log('tupla');
-        });
       });
       //======================================================================//
-      $('#table-venta tr').on('click',function() {
-        console.log('click on table tr');
-          $(this).children("td").on('click',function(){
-            console.log("click on td");
-          })
 
-      })
 
 });
 
@@ -272,38 +275,58 @@ function getProducto(){
     data:{type:'getProducto',producto:codigo},
     success:function(response){
       if(response=='0'){
-        console.log('Buscar producto');
+        alertify.error('<h4>'+errorLabel+'No encuentra producto. Buscar por nombre</h4>');
       }else{
         addItemVenta(JSON.parse(response));
-        calculaTotalVenta(JSON.parse(response).precio);
+        calculaTotalVenta();
       }
     },
     error:function(error){
-      alertify.error('<h4>'+errorLabel+'No se modificó el producto</h4>');
+      alertify.error('<h4>'+errorLabel+'No encuentra producto. Bucar por nombre</h4>');
     }
   });
-//============================================================================//
-function addItemVenta(producto){
-  var tupla ='<tr>';
-  tupla+= '<td class="td-center">'+producto.codigo+'</td>';
-  tupla+= '<td>'+producto.descripcion+'</td>';
-  tupla+='<td class="td-center" ><input id="'+producto.id+'" type="number" min="1" onchange="'+echoOnchangeVenta()+'" value="1"/></td>';
-  tupla+= '<td id="precio'+producto.id+'" class="td-center">$ '+producto.precio+'</td>';
-  tupla+= '<td id="total'+producto.id+'" class="td-center">$ '+producto.precio+'</td>';
-  tupla+= '<td onclick="$(this).closest(\'tr\').remove();" class="td-center delete-item-venta"><i class="fa fa-times fa-2x text-danger" aria-hidden="true"></i></td>';
-  tupla+= '</tr>';
-  $('tbody').append(tupla);
+  $('input#producto').val('');
 }
 //============================================================================//
-function echoOnchangeVenta(){
-  var cadena ="$('td#total'+$(this).attr('id')).html('$ '+parseFloat(parseFloat($('td#precio'+$(this).attr('id')).html().replace('$ ',''))*parseFloat($(this).val())).toFixed(2));";
+function addItemVenta(producto){
+  var total = producto.precio;
+  var cantidad = 1;
+  $('#table-venta tr').each(function(){
+    var codigolHtml = $(this).children('td.codigo').html();
+    if(producto.codigo == codigolHtml){
+      var idProducto = $(this).children('td.codigo').attr('id');
+      total =   $(this).children('td#total'+idProducto).html().replace('$ ','');
+      cantidad = (total/producto.precio)+1;
+      total = parseFloat(producto.precio * cantidad).toFixed(2);
+      console.log(total);
+      calculaTotalVenta();
+      $(this).remove();
+    }
+  });
+      var tupla ='<tr>';
+      tupla+= '<td id="'+producto.id+'" class="td-center codigo">'+producto.codigo+'</td>';
+      tupla+= '<td>'+producto.descripcion+'</td>';
+      tupla+='<td class="td-center" ><input id="'+producto.id+'" onchange="'+echoOnchangeProducto()+'" type="number" min="1" max="'+producto.stock+'" value="'+cantidad+'"/></td>';
+      tupla+= '<td id="precio'+producto.id+'" class="td-center">$ '+producto.precio+'</td>';
+      tupla+= '<td id="total'+producto.id+'" class="td-center total">$ '+total+'</td>';
+      tupla+= '<td onclick="$(this).closest(\'tr\').remove();" class="td-center"><i class="fa fa-times fa-2x text-danger" aria-hidden="true"></i></td>';
+      tupla+= '</tr>';
+      $('tbody').append(tupla);
+}
+//============================================================================//
+function echoOnchangeProducto(){
+  var cadena ="$('td#total'+$(this).attr('id')).html('$ '+parseFloat(parseFloat($('td#precio'+$(this).attr('id')).html().replace('$ ',''))*parseFloat($(this).val())).toFixed(2));$('h1#total-venta').click();";
   return cadena;
 }
 //============================================================================//
-function calculaTotalVenta(precio){
-  var total = parseFloat('0.00').toFixed(2);
-  $('h1#total-venta').empty();
-  $('h1#total-venta').append('$ '+total);
-}
-
+function calculaTotalVenta(){
+  var total = '0.00';
+  $('#table-venta tr').each(function(){
+    var totalHtml = $(this).children('td.total').html();
+    if(totalHtml!=undefined && totalHtml!=''){
+      totalHtml = totalHtml.replace('$ ','');
+      total= parseFloat(parseFloat(total) + parseFloat(totalHtml)).toFixed(2);
+    }
+  });
+  $('h1#total-venta').html('$ '+ total);
 }
