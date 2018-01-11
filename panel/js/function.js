@@ -1,5 +1,6 @@
 var errorLabel = '<i class="fa fa-times" aria-hidden="true"></i> ';
 var successLabel = '<i class="fa fa-check" aria-hidden="true"></i> ';
+var warningLabel = '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>';
 $( document ).ready(function() {
     /** *****************************FUNCIONES DE LOGIN********************** */
       $('#sendLogin').on('click',function(event){
@@ -13,7 +14,7 @@ $( document ).ready(function() {
       //======================================================================//
       $('a#sendLogout').on('click',function(event){
         event.preventDefault();
-        alertify.alert('Adios!', 'Estas saliendo del sistema',
+        alertify.alert('<h4><b>Adios!</b></h4>', 'Estas saliendo del sistema,',
           function(){
             window.location='/ShopManager/controllers/logout.php';
           }
@@ -29,11 +30,11 @@ $( document ).ready(function() {
         event.preventDefault();
         var id = $(this).attr('id');
         var descripcion = $('td#descripcion-'+id).html();
-        alertify.confirm('Modificar producto', '¿Desesas modificar '+descripcion+'?',
+        alertify.confirm('<h4><b>Modificar producto</b></h4>', '¿Desesas modificar '+descripcion+'?',
           function(){
             window.location='/ShopManager/panel/productos/modificar.php?pro='+id;
           }, function(){
-            alertify.error('<h4>'+errorLabel+'No se modificó el producto');
+            alertify.error('<h4>'+errorLabel+'No se modificó el producto</h4>');
         }).set('closable', false);
 
       });
@@ -42,7 +43,7 @@ $( document ).ready(function() {
         event.preventDefault();
         var id = $(this).attr('id');
         var descripcion = $('td#descripcion-'+id).html();
-        alertify.confirm('Eliminar producto', '¿Desesas eliminar '+descripcion+'?',
+        alertify.confirm('<h4><b>Eliminar producto</h4></b>', '¿Desesas eliminar '+descripcion+'?',
           function(){
             eliminarProducto(id);
           }, function(){
@@ -87,7 +88,7 @@ $( document ).ready(function() {
         $('input#producto').focus();
         $(this).val('');
         getProducto();
-        alertify.success(successLabel+'Producto Agregado.');
+        alertify.success('<h4>'+successLabel+'Producto Agregado.</h4>');
       });
       //======================================================================//
       $('h1#total-venta').on('click',function(event){
@@ -98,12 +99,10 @@ $( document ).ready(function() {
         if($('#table-venta tr').length==1){
           alertify.error('<h4>'+errorLabel+'No hay productos por cobrar.</h4>');
         }else{
-
+          confirmarVenta();
         }
       });
       //======================================================================//
-
-
 });
 
 //============================================================================//
@@ -190,17 +189,17 @@ function sendLogin(user,password){
     data:{usuario:user, contraseña:password},
     success:function(response){
       if(response=='Exito'){
-        alertify.alert('Exito!', 'Bienvenido al sistema',
+        alertify.alert('<h4><b>Exito!</b></h4>', 'Bienvenido al sistema',
           function(){
             window.location='/ShopManager/panel/';
         }).set('closable', false);
       }else{
-        alertify.alert('Acceso denegado!', 'Datos incorrectos')
+        alertify.alert('<h4><b>Acceso denegado!</b></h4>', 'Datos incorrectos')
         .set('closable', false);
       }
     },
     error:function(error){
-      alertify.alert('Upps!', 'Ocurrio un error, intente nuevamente')
+      alertify.alert('<h4><b>Upps!</b></h4>', 'Ocurrio un error, intente nuevamente')
       .set('closable', false);
     }
   });
@@ -232,7 +231,7 @@ function agregarProducto(datos){
     data:{type:'agregar',producto:datos},
     success:function(response){
       if(response=='Exito'){
-        alertify.alert('Exito!', 'Producto agregado',
+        alertify.alert('<h4><b>Exito!</b></h4>', 'Producto agregado',
           function(){
             window.location='/ShopManager/panel/productos';
           }).set('closable', false);
@@ -253,7 +252,7 @@ function modificarProducto(datos, pid){
     data:{type:'modificar',producto:datos,id:pid},
     success:function(response){
       if(response=='Exito'){
-        alertify.alert('Exito!', 'Producto modificado',
+        alertify.alert('<h4><b>Exito!</b></h4>', 'Producto modificado',
           function(){
             window.location='/ShopManager/panel/productos';
           }).set('closable', false);
@@ -298,7 +297,6 @@ function addItemVenta(producto){
       total =   $(this).children('td#total'+idProducto).html().replace('$ ','');
       cantidad = (total/producto.precio)+1;
       total = parseFloat(producto.precio * cantidad).toFixed(2);
-      console.log(total);
       calculaTotalVenta();
       $(this).remove();
     }
@@ -329,4 +327,33 @@ function calculaTotalVenta(){
     }
   });
   $('h1#total-venta').html('$ '+ total);
+}
+//============================================================================//
+function confirmarVenta(){
+  var totalVenta = '0.00';
+  var totalArticulo = 0;
+
+  $('#table-venta tr').each(function(){
+      var idProducto = $(this).children('td.codigo').attr('id');
+      if(idProducto!=undefined){
+        var totalProducto = $(this).children('td#total'+idProducto).html().replace('$ ','');
+        var precioProducto = $(this).children('td#precio'+idProducto).html().replace('$ ','');
+        var cantidad = (totalProducto/precioProducto);
+
+        totalVenta = parseFloat(totalProducto+totalVenta).toFixed(2);
+        totalArticulo = totalArticulo+cantidad;
+      }
+  });
+
+  var mensaje = '<b>Total de articulos:</b> '+totalArticulo+'<br/> <b>Total de venta:</b> $ '+totalVenta+'<br/><b>¿Deseas cerrar esta venta?</b>';
+  alertify.confirm('<h4><b>Confirmar venta</b></h4>', mensaje,
+    function(){
+         alertify.prompt('<h4><b>Cobrar venta</b></h4>', 'Total de venta: $ <br/>Ingrese efectivo:', '0',
+            function(evt, value) { alertify.success('You entered: ' + value) },
+            function() { alertify.warning('<h4>'+warningLabel+'Venta abierta</h4>') }).set('type', 'number').set('closable',false);
+    },
+    function(){
+      alertify.warning('<h4>'+warningLabel+'Venta abierta.</h4>');
+    }).set('closable',false);
+
 }

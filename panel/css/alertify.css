@@ -867,14 +867,14 @@
   margin-top: 10px;
 }
 .alertify-notifier .ajs-message.ajs-success {
-  background: rgba(91, 189, 114, 0.95); !important
+  background: rgb(91, 189, 114);
 }
 .alertify-notifier .ajs-message.ajs-error {
   background: rgba(217, 92, 92, 0.95);
   text-align: center;
 }
 .alertify-notifier .ajs-message.ajs-warning {
-  background: rgba(252, 248, 215, 0.95);
+  background: rgb(252, 248, 215);
 }
 .alertify-notifier .ajs-message .ajs-close {
   position: absolute;
